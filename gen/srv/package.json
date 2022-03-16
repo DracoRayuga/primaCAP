@@ -1,0 +1,71 @@
+{
+  "name": "primaCAP",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@sap/cds": "^5",
+    "@sap/hana-client": "^2.11.20",
+    "express": "^4",
+    "hdb": "^0.17.2",
+    "uuidv4": "^6.2.4"
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "4.3.0",
+    "sqlite3": "^5.0.2"
+  },
+  "engines": {
+    "node": "^14"
+  },
+  "cds": {
+    "requires": {
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "db": {
+        "kind": "hana",
+        "pool": {
+          "max": 1400,
+          "min": 100
+        },
+        "model": [
+          "db",
+          "srv"
+        ]
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  },
+  "scripts": {
+    "start": "cds run",
+    "build": "cds build/all --clean;cp gen/srv/srv/csn.json;cp -r gen/db/src/gen db/src"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  }
+}
